@@ -24,8 +24,8 @@ type customer struct {
 	active  bool
 }
 
-func NewCustomer(name string, address address) (*customer, error) {
-	c := customer{name: name, address: address}
+func NewCustomer(id, name string, address address) (*customer, error) {
+	c := customer{id: id, name: name, address: address}
 	err := c.Validate()
 	if err != nil {
 		return nil, err
@@ -36,6 +36,9 @@ func NewCustomer(name string, address address) (*customer, error) {
 }
 
 func (c *customer) Validate() error {
+	if c.id == "" {
+		return errors.New("id is required")
+	}
 	if c.name == "" {
 		return errors.New("name is required")
 	}

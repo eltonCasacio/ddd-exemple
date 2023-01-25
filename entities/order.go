@@ -1,6 +1,9 @@
 package entities
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type order struct {
 	id         string
@@ -8,9 +11,9 @@ type order struct {
 	items      []item
 }
 
-func NewOrder(customerID string, items []item) (*order, error) {
+func NewOrder(id, customerID string, items []item) (*order, error) {
 	o := &order{
-		id:         "1",
+		id:         id,
 		customerID: customerID,
 		items:      items,
 	}
@@ -29,4 +32,12 @@ func (o *order) Validate() error {
 		return errors.New("item must be greather than zero")
 	}
 	return nil
+}
+
+func (o *order) ToString() string {
+	return fmt.Sprintf(`
+	ID: %s
+	customerID: %s
+	items: %v
+	`, o.id, o.customerID, o.items)
 }

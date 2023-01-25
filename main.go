@@ -13,10 +13,21 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	customer, err := entities.NewCustomer("João", *address)
+	customer, err := entities.NewCustomer("1", "João", *address)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	fmt.Println(customer.ToString())
+	itens := entities.NewArrayOfItems()
+
+	item := entities.NewItem("1", "macbook air m1", 8.000)
+	itens = append(itens, *item)
+
+	order, err := entities.NewOrder("1", customer.GetID(), itens)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Ordem\n", order.ToString())
+	fmt.Println("Cliente\n", customer.ToString())
 }
