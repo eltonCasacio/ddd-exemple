@@ -1,4 +1,4 @@
-package entities
+package order
 
 import (
 	"errors"
@@ -8,10 +8,10 @@ import (
 type order struct {
 	id         string
 	customerID string
-	items      []item
+	items      *[]item
 }
 
-func NewOrder(id, customerID string, items []item) (*order, error) {
+func NewOrder(id, customerID string, items *[]item) (*order, error) {
 	o := &order{
 		id:         id,
 		customerID: customerID,
@@ -28,7 +28,7 @@ func (o *order) Validate() error {
 	if o.customerID == "" {
 		return errors.New("customer id is require")
 	}
-	if len(o.items) < 1 {
+	if len(*o.items) < 1 {
 		return errors.New("item must be greather than zero")
 	}
 	return nil

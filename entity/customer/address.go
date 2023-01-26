@@ -1,4 +1,4 @@
-package entities
+package customer
 
 /*
 	Pense no objeto de valor como um tipo personalizado.

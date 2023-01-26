@@ -4,26 +4,27 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/eltoncasacio/ddd-modelagem-tatica/entities"
+	"github.com/eltoncasacio/ddd-modelagem-tatica/entity/customer"
+	"github.com/eltoncasacio/ddd-modelagem-tatica/entity/order"
 )
 
 func main() {
-	address, err := entities.NewAddress("país", "cidade", "bairro", "rua", "12234567", 23)
+	address, err := customer.NewAddress("país", "cidade", "bairro", "rua", "12234567", 23)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	customer, err := entities.NewCustomer("1", "João", *address)
+	customer, err := customer.NewCustomer("1", "João", *address)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	itens := entities.NewArrayOfItems()
+	itens := order.NewArrayOfItems()
 
-	item := entities.NewItem("1", "macbook air m1", 8.000)
+	item := order.NewItem("1", "macbook air m1", 8.000)
 	itens = append(itens, *item)
 
-	order, err := entities.NewOrder("1", customer.GetID(), itens)
+	order, err := order.NewOrder("1", customer.GetID(), &itens)
 	if err != nil {
 		log.Fatal(err)
 	}

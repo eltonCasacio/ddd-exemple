@@ -1,4 +1,4 @@
-package entities
+package customer
 
 import (
 	"errors"
