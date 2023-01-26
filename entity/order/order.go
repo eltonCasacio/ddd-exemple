@@ -9,6 +9,7 @@ type order struct {
 	id         string
 	customerID string
 	items      *[]item
+	price      float64
 }
 
 func NewOrder(id, customerID string, items *[]item) (*order, error) {
@@ -18,10 +19,21 @@ func NewOrder(id, customerID string, items *[]item) (*order, error) {
 		items:      items,
 	}
 	err := o.Validate()
+	o.CalculateTotalPrice()
 	if err != nil {
 		return nil, err
 	}
 	return o, nil
+}
+
+func (o *order) CalculateTotalPrice() {
+	for _, v := range *o.items {
+		o.price = o.price + (v.price * float64(v.quantity))
+	}
+}
+
+func (o *order) GetPrice() float64 {
+	return o.price
 }
 
 func (o *order) Validate() error {

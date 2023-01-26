@@ -21,7 +21,7 @@ func main() {
 
 	itens := order.NewArrayOfItems()
 
-	item := order.NewItem("1", "macbook air m1", 8.000)
+	item, _ := order.NewItem("1", "macbook air m1", 8.000, 2)
 	itens = append(itens, *item)
 
 	order, err := order.NewOrder("1", customer.GetID(), &itens)
